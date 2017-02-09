@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D轮播图</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		body{
+			background: #333;
+		}
+		#box{
+			width:300px;
+			height: 200px;
+			position:relative;
+			top:40%;
+			left: 50%;
+			margin: -100px 0 0 -150px;
+			transform-style: preserve-3d;
+			perspective: 800px;
+		}
+		#box div{
+			transform-style: preserve-3d;
+			position: absolute;
+			width:260px;
+			height: 200px;
+			color:#fff;
+			line-height: 220%;
+			font-size: 150px;
+			overflow: hidden;
+			font-family: arial;
+			text-align: right;
+			padding: 0 20px;
+			cursor: pointer;
+			transition: .7s ease-in-out; 
+			text-shadow: 0 0 3px rgba(0,0,0,.3);
+		}
+		#box div:nth-of-type(1){
+			background: #fc960f;
+		}
+		#box div:nth-of-type(2){
+			background: #f8f723;
+		}
+		#box div:nth-of-type(3){
+			background: #25ae20;
+		}
+		#box div:nth-of-type(4){
+			background: #57ebed;
+		}
+		#box div:nth-of-type(5){
+			background: #1c43c2;
+		}
+		#box div:nth-of-type(6){
+			background: #ab0fdd;
+		}
+		#box div:nth-of-type(7){
+			background: #cb0d0f;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oBox = document.getElementById('box');
+        for(var i=0;i<7;i++){
+            var odiv = document.createElement('div');
+            var attr = document.createAttribute('item');
+                attr.value = i;
+            var text = document.createTextNode(i);
+            odiv.append(text);
+            odiv.setAttributeNode(attr);
+            oBox.append(odiv);
+        }
+		var oDivs = oBox.getElementsByTagName('div');
+		var timer = null;
+		var target = 0,flag = false;
+		setTimeout(function(){
+            tab(target);
+		});
+        timer = setInterval(go,5000);
+        oBox.onclick = function(ev){
+            var e = ev || window.event;
+            var node = e.target || e.srcElement;
+            var dir = window.innerWidth/2-e.clientX;
+            if((node.getAttribute('item')*1!==target) && !flag){
+            	flag=true;
+            	clearInterval(timer);
+            	clickRun(dir,node.getAttribute('item')*1);
+            }
+        };
+        function go(){
+        	target++;
+        	if(target>6){
+        		target=0;
+        	}
+            tab(target);
+        }
+        function clickRun(dir,clickNun){
+        	var clickTimer = null;
+                clickTimer = setInterval(function(){
+        			if(target===clickNun){
+        				flag = false;
+        				clearInterval(clickTimer);
+        				timer = setInterval(go,5000);
+        				return;
+        			}
+        			if(dir>0){  //左边
+        				target--;
+	        			if(target<0){
+	        				target=6;
+	        			}
+        			}else{  //右边
+        				target++;
+	        			if(target>6){
+	        				target=0;
+	        			}
+        			}
+                    tab(target);
+        		},800);
+        }
+		function tab(n){
+			var Left,Right;
+			for(var i=0;i<3;i++){
+				Left = n-1-i;
+				if(Left<0){
+					Left += 7;
+				}
+	            oDivs[Left].style.transform = "translateX("+-110*(i+1)+"px) translateZ("+(200-i*100)+"px) rotateY(30deg)";
+                Right = n+1+i;
+                if(Right>6){
+                	Right-=7;
+                }
+	            oDivs[Right].style.transform = "translateX("+110*(i+1)+"px) translateZ("+(200-i*100)+"px) rotateY(-30deg)";
+		    }
+		    target = n;
+		    oDivs[n].style.transform = "translateZ(300px)";
+		}
+	}
+   </script>
+</head>
+<body>
+   <div id="box">
+   </div>
+</body>
+</html>
