@@ -83,7 +83,7 @@
 		setTimeout(function(){
             tab(target);
 		});
-        timer = setInterval(go,5000);
+        timer = setInterval(go,3000);
         oBox.onclick = function(ev){
             var e = ev || window.event;
             var node = e.target || e.srcElement;
@@ -107,7 +107,7 @@
         			if(target===clickNun){
         				flag = false;
         				clearInterval(clickTimer);
-        				timer = setInterval(go,5000);
+        				timer = setInterval(go,3000);
         				return;
         			}
         			if(dir>0){  //左边
@@ -135,7 +135,7 @@
 				if(flag){
 				    oDivs[Left].style.transition = '.2s ease-in-out';
 				}else{
-                    oDivs[Left].style.transition = '.7s ease-in-out';
+                                    oDivs[Left].style.transition = '.7s ease-in-out';
 				}
                 Right = n+1+i;
                 if(Right>6){
