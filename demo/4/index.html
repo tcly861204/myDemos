@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript" src="js/data.js"></script>
+    <script type="text/javascript" src="js/photo.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/basic.css"/>
+</head>
+<body>
+<div class="photo_wall">
+    <!--照片和导航区域-->
+    <div class="photo">
+        <!--照片的外层，用来做旋转和位移-->
+        <div class="photo_i front" id="photo_{{id}}">
+            <!--照片内层,用来做3d翻转的-->
+            <div class="photo_3d">
+                <!--照片的正面-->
+                <div class="photo_side photo_front">
+                    <p><img {{src}}="{{img}}"></p>
+                    <h3>{{caption}}</h3>
+                </div>
+                <!--照片的反面-->
+                <div class="photo_side photo_back">
+                    <p class="desc">{{desc}}</p>
+                </div>
+            </div>
+        </div>
+        {{split}}
+        <!--导航区域-->
+        <div class="nav">
+            <span class="nav_i" id="nav_{{id}}">&#xe67e</span>
+        </div>
+    </div>
+    <div class="shade">
+        <div class="start">Start View</div>
+    </div>
+</div>
+
+
+</body>
+</html>
