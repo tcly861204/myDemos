@@ -34,7 +34,7 @@
     }
     root.$ = function(sele){
         return new Tools(sele);
-    }
+    };
     function Tools(sele){
         var first = sele.substr(0,1);
         isArr = sele.split(' ');
@@ -53,6 +53,16 @@
     }
     Tools.prototype = {
         constructor:Tools,
+        query:function(){
+            var that = this;
+            return that.length===1 ? that[0] : (function(){
+                        var arr = [];
+                        for(var i=0;i<that.length;i++){
+                            arr.push(that[i]);
+                        }
+                        return arr;
+                    })();
+        },
         css : function(style,value){  //设置css
             if(style && typeof style==='string' && !value){
                 for(var i=0;i<this.length;i++){

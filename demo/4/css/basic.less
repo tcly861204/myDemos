@@ -8,7 +8,7 @@ body,p,h3{
 .photo_wall{
   width: 100%;
   height: 600px;
-  background: url("../imgs/bg.jpg") no-repeat center center;
+  background: #333;
   background-size:cover;
   position: relative;
   overflow: hidden;
@@ -49,6 +49,7 @@ body,p,h3{
   top:0;
   left: 0;
   z-index: 1;
+  opacity: 0;
   .photo_i,.photo_3d,.photo_side{
     width: 336px;
     height: 392px;
@@ -113,9 +114,11 @@ body,p,h3{
     transform: translateX(100%) rotateY(-180deg);
   }
   .center{
+    z-index: 9999;
     left: 50%;
     top: 50%;
-    margin: -199px 0 0 -168px;
+    transform: translate(-50%,-50%) scale(1) rotate(0);
+    cursor: pointer;
   }
 }
 @font-face {
